@@ -1,25 +1,33 @@
 import React, {Component} from 'react';
 import CountDownTimer from './CountDownTimer';
 
+
 class LinksListItem extends Component {
 
     constructor(props) {
         super(props);
+
+
+
     }
+
+
+
+
 
     render() {
         const {link} = this.props;
         return (
-            <li className='list-group-item'>
-                <div>
+            <li className='list-group-item' >
+                <div >
                     <p className={link.status === 'EXPIRED' && 'text-danger' || 'text-primary'}>{link.text}</p>
                     <br/>
                     <CountDownTimer time={link.deferByTime} id={link.id} onLinkExpired={this.props.onLinkExpired}/>
                     <br/>
                     {
-                        link.status !== 'DONE' && <button type="button" className="btn btn-success">Done</button>
+                        link.status !== 'DONE' && <button onClick={(e) => this.props.doneFunction({link})} type="button" className="btn btn-success">Done</button>
                     }
-                    <button type="button" className="btn btn-info">Edit</button>
+                    <button onClick={(e) => this.props.editFunction({link})}   type="button" className="btn btn-info">Edit</button>
                 </div>
             </li>
         )

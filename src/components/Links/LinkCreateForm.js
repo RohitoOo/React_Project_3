@@ -7,9 +7,10 @@ class LinkCreateForm extends Component {
         super(props);
 
         this.state = {
-            text: '',
+            text: this.props.fields,
             tags: '',
             deferByTime: '',
+
         }
     }
 
@@ -18,6 +19,31 @@ class LinkCreateForm extends Component {
             [event.target.name]: event.target.value
         })
     };
+
+    normaliseData = (toBeSplit) => {
+
+     // toBeSplit.tags == string
+     // toBeSplit.tags.split(' ') =tagsAreSplit = array
+
+     toBeSplit.tags = toBeSplit.tags.split(' ')
+    return toBeSplit;
+    }
+
+
+
+    // editFunction = (e) => {
+    //
+    //
+    // console.log(e.link)
+    //   this.setState({
+    //       text: e.text,
+    //       tags: e.tags,
+    //       deferByTime: e.deferByTime,
+    //
+    //   })
+    // }
+
+
 
     render() {
         return (
@@ -52,8 +78,8 @@ class LinkCreateForm extends Component {
                            onChange={(e) => this.onInputChange(e)}
                            value={this.state.deferByTime}/>
                 </div>
-                <button className="btn btn-primary" onClick={() => this.props.onSave(this.state)}>save</button>
-            </div>
+                <button className="btn btn-primary" onClick={() => this.props.onSave(this.normaliseData(this.state))}>save</button>
+          </div>
         )
     }
 
